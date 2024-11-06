@@ -27,7 +27,7 @@ A simple task management API built with Flask and MongoDB. This project demonstr
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/flask-task-manager.git
+   git clone https://github.com/Bolt00/flask-task-manager.git
    cd flask-task-manager
 
 2. **Set up a virtual environment**:
