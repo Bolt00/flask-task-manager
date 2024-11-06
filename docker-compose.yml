@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+    container_name: flask_app
+    ports:
+      - "5000:5000"  # Map the container's port 5000 to the host's port 5000
+    environment:
+      - MONGO_URI=mongodb+srv://devbolt00:Gqj31PxLzGoekBry@cluster0.ejj4o.mongodb.net/task_db?retryWrites=true&w=majority&appName=Cluster0
+    depends_on:
+      - mongo  # Wait until MongoDB is ready before starting the app
+    volumes:
+      - .:/app  # Optional: mount current directory to /app in the container for easier development
+    networks:
+      - flask_mongo_network
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"  # Expose MongoDB on the default port
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo_data:/data/db  # Persistent data storage for MongoDB
+    networks:
+      - flask_mongo_network
+
+volumes:
+  mongo_data:
+
+networks:
+  flask_mongo_network:
